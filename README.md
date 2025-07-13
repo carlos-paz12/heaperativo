@@ -58,7 +58,7 @@ cmake --build build
 ```
 
 ## Authors
-<table>
+<table align="center">
   <tr>
     <td align="center">
       <a href="https://github.com/carolln">
@@ -107,4 +107,4 @@ cmake --build build
 
 ---
 
-&copy; DIMAp | Departamento de Informática e Matemática Aplicada - 2025
+<div align="center"> &copy; DIMAp | Departamento de Informática e Matemática Aplicada - 2025 </div>
