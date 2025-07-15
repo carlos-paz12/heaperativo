@@ -12,6 +12,10 @@ void MinHeap::heapify_up(size_t index)
 void MinHeap::heapify_down(size_t index)
 {}
 
+
+///===================== PUBLIC INTERFACE =====================
+
+
 /// @brief
 /// @param i
 /// @param j
@@ -23,8 +27,6 @@ void MinHeap::swap_nodes(size_t i, size_t j)
 /// @return
 int MinHeap::key(size_t index) const 
 {}
-
-///===================== PUBLIC INTERFACE =====================
 
 /// @brief
 /// @param queue

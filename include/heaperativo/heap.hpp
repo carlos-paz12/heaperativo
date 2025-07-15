@@ -17,15 +17,19 @@ private:
   //> Mapeamento ID -> índice
   std::unordered_map<unsigned int, size_t> index_map_;
 
-  void heapify_up(size_t index);
-  void heapify_down(size_t index);
-
+  
   void swap_nodes(size_t i, size_t j);
   
   //> Calcula a chave (time_to_kill - time_used)
   int key(size_t index) const;
+  
+  public:
+  
+  void heapify_up(size_t index);
+  void heapify_down(size_t index);
 
-public:
+  void remove_if(size_t index); // essa função eh uma de remoção adaptada ! só remove a raiz se ela tiver key = 0
+
   static MinHeap convert_queue_to_heap(Queue *queue);
   //> usa insert_in_queue e init_queue
   Queue *convert_heap_to_queue() const;

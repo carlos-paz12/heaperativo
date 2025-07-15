@@ -6,7 +6,7 @@
  * Enum para representar programas Unix
  *
  */
-enum unix_program {
+enum UnixProgram {
   VI,
   EX,
   AWK,
@@ -35,13 +35,13 @@ enum unix_program {
  * Função para obter o nome do programa como string
  *
  */
-const char *get_program_name(unix_program program);
+const char *get_program_name(UnixProgram program);
 
 /**
  *
  * Função que pega um UnixProgram aleatoriamente
  *
  */
-unix_program get_random_program();
+UnixProgram get_random_program();
 
 #endif //!< UNIX_PROGRAM
