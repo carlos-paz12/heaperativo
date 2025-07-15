@@ -1,4 +1,4 @@
-#include "../include/heaperativo/heap.hpp"
+#include "heap.hpp"
 #include "process.hpp"
 #include <stdio.h>
 #include <stdlib.h>
