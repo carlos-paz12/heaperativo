@@ -1,7 +1,7 @@
-#ifndef PROCESS_H
-#define PROCESS_H
+#ifndef PROCESS_HPP
+#define PROCESS_HPP
 
-#include "unix_program.h"
+#include "unix_program.hpp"
 #include <time.h>
 
 #define IDMAXREF 500
@@ -37,4 +37,4 @@ void update_used_time(Process *&p, int time);
  */
 void execute_Process(Process *&p);
 
-#endif // PROCESS_H
+#endif // PROCESS_HPP

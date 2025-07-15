@@ -1,7 +1,7 @@
-#ifndef QUEUE_H
-#define QUEUE_H
+#ifndef QUEUE_HPP
+#define QUEUE_HPP
 
-#include "node.h"
+#include "node.hpp"
 
 /**
  *
@@ -42,4 +42,4 @@ Queue *create_queue_of_process(int n);
  */
 void print_queue_of_process(Queue *q);
 
-#endif //!< QUEUE_H
+#endif //!< QUEUE_HPP
