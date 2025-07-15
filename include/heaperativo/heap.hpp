@@ -3,32 +3,28 @@
 
 #include "process.hpp"
 #include <functional>
-#include <vector>
 #include <unordered_map>
-#include "queue.hpp"
-#include "node.hpp"
+#include <vector>
 
 /// @brief
-class MinHeap
-{
+class MinHeap {
 private:
   //> Armazenamento dos processos
   std::vector<Process> heap_;
   //> Mapeamento ID -> índice
   std::unordered_map<unsigned int, size_t> index_map_;
 
-  
   void swap_nodes(size_t i, size_t j);
-  
+
   //> Calcula a chave (time_to_kill - time_used)
   int key(size_t index) const;
-  
-  public:
-  
+
+public:
   void heapify_up(size_t index);
   void heapify_down(size_t index);
 
-  void remove_if(size_t index); // essa função eh uma de remoção adaptada ! só remove a raiz se ela tiver key = 0
+  void remove_if(size_t index); // essa função eh uma de remoção adaptada ! só
+                                // remove a raiz se ela tiver key = 0
 
   static MinHeap convert_queue_to_heap(Queue *queue);
   //> usa insert_in_queue e init_queue

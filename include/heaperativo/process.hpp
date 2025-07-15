@@ -10,27 +10,27 @@
  *
  */
 typedef enum {
-    VI,
-    EX,
-    AWK,
-    SED,
-    CC,
-    MAKE,
-    NROFF,
-    TROFF,
-    TBL,
-    EQN,
-    YACC,
-    LEX,
-    ADB,
-    DB,
-    CSH,
-    EMACS,
-    TIP,
-    CRON,
-    FTP,
-    TELNET,
-    PROGRAM_COUNT // usado para saber o total de programas
+  VI,
+  EX,
+  AWK,
+  SED,
+  CC,
+  MAKE,
+  NROFF,
+  TROFF,
+  TBL,
+  EQN,
+  YACC,
+  LEX,
+  ADB,
+  DB,
+  CSH,
+  EMACS,
+  TIP,
+  CRON,
+  FTP,
+  TELNET,
+  PROGRAM_COUNT // usado para saber o total de programas
 } UnixProgram;
 
 /**
@@ -38,14 +38,14 @@ typedef enum {
  * Função para obter o nome do programa como string
  *
  */
-const char* getProgramName(UnixProgram program);
+const char *getProgramName(UnixProgram program);
 
 /**
  *
  * Função que pega um UnixProgram aleatoriamente
  *
  */
-//UnixProgram getRandomProgram();
+UnixProgram getRandomProgram();
 
 /**
  *
@@ -104,7 +104,7 @@ typedef struct {
  * Inicializa uma fila vazia
  *
  */
- Queue* init_queue();
+Queue *init_queue();
 
 /**
  *
@@ -118,7 +118,7 @@ void insert_in_queue(Queue *q, Process p);
  * Insere n processos aleatoriamente no fila
  *
  */
-Queue* create_queue_of_process(int n);
+Queue *create_queue_of_process(int n);
 
 /**
  *
@@ -126,6 +126,5 @@ Queue* create_queue_of_process(int n);
  *
  */
 void print_queue_of_process(Queue *q);
-
 
 #endif

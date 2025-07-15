@@ -42,10 +42,7 @@ add_executable(
                 ${APP_NAME}
                 sources/main.cpp
                 sources/heaperativo/heap.cpp
-                sources/heaperativo/node.cpp
                 sources/heaperativo/process.cpp
-                sources/heaperativo/queue.cpp
-                sources/heaperativo/unix_program.cpp
                )
 
 # Specify directories to search for header files.
