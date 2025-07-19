@@ -127,4 +127,11 @@ Queue *create_queue_of_process(int n);
  */
 void print_queue_of_process(Queue *q);
 
+/**
+ *
+ * Apaga a memória alocada para a fila e seus nodes
+ *
+ */
+void free_queue(Queue *q);
+
 #endif
