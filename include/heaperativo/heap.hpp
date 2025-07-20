@@ -2,17 +2,20 @@
 #define HEAP_HPP
 
 #include "process.hpp"
-#include <functional>
-#include <unordered_map>
-#include <vector>
+
+#include <cstddef>       // size_t
+#include <unordered_map> // std::unordered_map
+#include <vector>        // std::vector
 
 /// @brief
 class MinHeap {
 private:
-  //> Armazenamento dos processos
-  std::vector<Process> heap_;
+  //> Armazenamento dos processos.
+  std::vector<Process> m_processes;
+  //> Quantidade de processos armazenados.
+  size_t m_size{0};
   //> Mapeamento ID -> índice
-  std::unordered_map<unsigned int, size_t> index_map_;
+  std::unordered_map<unsigned int, size_t> id_to_index;
 
   void swap_nodes(size_t i_node_idx, size_t j_node_idx);
 
@@ -23,10 +26,13 @@ private:
   void heapify_up(size_t index);
   void heapify_down(size_t index);
 
-public: 
+public:
   //> Funções de conversão entre fila e heap
-  static MinHeap convert_queue_to_heap(Queue *queue); //> não apaga a fila original (se precisar fazer isso, chamar free_queue)
-  Queue *convert_heap_to_queue() const; //> usa insert_in_queue e init_queue mas não apaga a heap original (por isso const)
+  //> não apaga a fila original (se precisar fazer isso, chamar free_queue)
+  static MinHeap convert_queue_to_heap(Queue *queue);
+  //> usa insert_in_queue e init_queue mas não apaga a heap original (por isso const)
+  Queue *convert_heap_to_queue() const;
+
   //> funções de conversão em geral não devem apagar a estrutura original
   //> é responsabilidade do usuário apagar a estrutura original se necessário
   //> pode ser bem contraintuitivo e inesperada a exclusão dependendo do uso
@@ -44,15 +50,20 @@ public:
   //> então ao menos se limite à função fazer
   //> apenas o que o nome dela diz que ela faz
   //> aula gratis :3
+  //> (princípio da responsabilidade única)
 
-  //> Demais funções
-  void update_key(unsigned int process_id);
   bool is_empty() const noexcept;
+
   size_t size() const noexcept;
-  bool remove_root_if_zero(); //> Retorna true se o root for removido
-  int root_key() const; //> Retorna a chave do root
+
+  size_t capacity() const noexcept;
+
   void insert(const Process &process);
+
+  void update_key(unsigned int process_id);
+  bool remove_root_if_zero();
+  int root_key() const;
   Process extract_min();
 };
 
-#endif // HEAP_HPPulamento
+#endif // HEAP_HPP
