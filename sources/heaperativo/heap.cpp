@@ -127,7 +127,16 @@ int MinHeap::root_key() const {}
 
 /// @brief
 /// @param process_id
-void MinHeap::update_key(unsigned int process_id) {}
+void MinHeap::update_key(unsigned int process_id) {
+  auto it = id_to_index.find(process_id);
+  if (it == id_to_index.end()) return; // ID não encontrado
+
+  size_t index = it->second;
+
+  // Tenta reequilibrar para cima e para baixo
+  heapify_up(index);
+  heapify_down(index);
+}
 
 /// @brief
 /// @return
