@@ -36,7 +36,32 @@ void MinHeap::heapify_up(size_t index) {
 
 /// @brief
 /// @param index
-void MinHeap::heapify_down(size_t index) {}
+void MinHeap::heapify_down(size_t index) {
+  size_t left, right, smallest;
+
+  while (true) {
+    left = 2 * index + 1;
+    right = 2 * index + 2;
+    smallest = index;
+
+    // Compara com filho esquerdo
+    if (left < m_size && key(left) < key(smallest)) {
+      smallest = left;
+    }
+
+    // Compara com filho direito
+    if (right < m_size && key(right) < key(smallest)) {
+      smallest = right;
+    }
+
+    // Se o menor já é o próprio índice
+    if (smallest == index) break;
+
+    // Troca com o menor filho e continua
+    swap_nodes(index, smallest);
+    index = smallest;
+  }
+}
 
 ///===================== PUBLIC INTERFACE =====================
 /// @brief Converte uma fila em uma min-heap.
