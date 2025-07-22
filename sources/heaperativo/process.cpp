@@ -66,12 +66,18 @@ Process create_Process() {
   return process;
 }
 
-void update_used_time(Process *p, int time) { p->time_used = time; }
+void update_used_time(Process *p, unsigned int time) { p->time_used = time; }
 
 void execute_Process(Process *p) {
   std::cout << "Executing process: " << getProgramName(p->name) << '\n';
-  int time_in_cpu = (rand() % p->time_to_kill) + 1;
-  update_used_time(p, time_in_cpu);
+  unsigned int quantum_time = (rand() % 100) + 1; // Quantum de tempo de 1 a 100
+  // Incrementa o tempo usado, mas não excede time_to_kill
+  unsigned int new_time_used = p->time_used + quantum_time;
+  if (new_time_used > p->time_to_kill) {
+    new_time_used = p->time_to_kill;
+  }
+  
+  update_used_time(p, new_time_used);
 }
 
 Queue *init_queue() {

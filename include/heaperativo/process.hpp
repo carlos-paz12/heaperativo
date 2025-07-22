@@ -70,7 +70,7 @@ Process create_Process();
  *
  * Função que atualiza o valor do time_used de um process
  */
-void update_used_time(Process *p, int time);
+void update_used_time(Process *p, unsigned int time);
 
 /**
  *
