@@ -1,13 +1,12 @@
 #include "process.hpp"
 
+#include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
-const char *getProgramName(UnixProgram program)
-{
-  switch (program)
-  {
+const char *getProgramName(UnixProgram program) {
+  switch (program) {
   case VI:
     return "vi";
   case EX:
@@ -55,8 +54,7 @@ const char *getProgramName(UnixProgram program)
 
 UnixProgram getRandomProgram() { return (UnixProgram)(rand() % PROGRAM_COUNT); }
 
-Process create_Process()
-{
+Process create_Process() {
   UnixProgram program = getRandomProgram();
   int id = (rand() % IDMAXREF) + 1;
   int t_kill = (rand() % 999) + 1;
@@ -70,14 +68,13 @@ Process create_Process()
 
 void update_used_time(Process *p, int time) { p->time_used = time; }
 
-void execute_Process(Process *p)
-{
+void execute_Process(Process *p) {
+  std::cout << "Executing process: " << getProgramName(p->name) << '\n';
   int time_in_cpu = (rand() % p->time_to_kill) + 1;
   update_used_time(p, time_in_cpu);
 }
 
-Queue *init_queue()
-{
+Queue *init_queue() {
   Queue *q = (Queue *)malloc(sizeof(Queue));
   q->size = 0;
   q->start = NULL;
@@ -85,55 +82,44 @@ Queue *init_queue()
   return q;
 }
 
-void insert_in_queue(Queue *q, Process p)
-{
+void insert_in_queue(Queue *q, Process p) {
   // Node *n = malloc(sizeof(Node));
   Node *n = new Node;
   n->process = p;
   n->next = NULL;
-  if (q->size == 0)
-  {
+  if (q->size == 0) {
     q->start = n;
     q->end = n;
     q->size = q->size + 1;
-  }
-  else
-  {
+  } else {
     q->end->next = n;
     q->end = n;
     q->size = q->size + 1;
   }
 }
 
-Queue *create_queue_of_process(int n)
-{
+Queue *create_queue_of_process(int n) {
   Queue *q = init_queue();
-  while (q->size < n)
-  {
+  while (q->size < n) {
     Process p = create_Process();
     insert_in_queue(q, p);
   }
   return q;
 }
 
-void print_queue_of_process(Queue *q)
-{
+void print_queue_of_process(Queue *q) {
   srand((unsigned)time(NULL));
   Node *wanderer = q->start;
-  while (wanderer != NULL)
-  {
-    printf("Process id=%d, Program=%s, time_to_kill=%d, time_used=%d \n",
-           wanderer->process.id, getProgramName(wanderer->process.name),
-           wanderer->process.time_to_kill, wanderer->process.time_used);
+  while (wanderer != NULL) {
+    printf("Process id=%d, Program=%s, time_to_kill=%d, time_used=%d \n", wanderer->process.id,
+           getProgramName(wanderer->process.name), wanderer->process.time_to_kill, wanderer->process.time_used);
     wanderer = wanderer->next;
   }
 }
 
-void free_queue(Queue *q)
-{
+void free_queue(Queue *q) {
   Node *current = q->start;
-  while (current)
-  {
+  while (current) {
     Node *next = current->next;
     delete current;
     current = next;

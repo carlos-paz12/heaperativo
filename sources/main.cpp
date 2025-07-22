@@ -3,56 +3,28 @@
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
 
-int main(int argc, char *argv[])
-{
-  int n_process;
-  if (argc != 2)
-  {
-    fprintf(stderr, "%s simula o gereciamento de 0 processos\n", argv[0]);
-    return 1;
+int main(int argc, char *argv[]) {
+  if (argc != 2) {
+    std::cerr << argv[0] << " simula o gerenciamento de N processos.\n";
+    return EXIT_FAILURE;
   }
-  n_process = atoi(argv[1]);
-  if (n_process <= 0)
-  {
-    fprintf(stderr, "A quantidade de processo deve ser maior que 0.\n");
-    return 1;
-  }
+
+  int n_process = std::atoi(argv[1]);
+
+  std::srand(static_cast<unsigned int>(std::time(nullptr)));
 
   Queue *q = create_queue_of_process(n_process + 1);
+  MinHeap heap = MinHeap::convert_queue_to_heap(q);
 
-  MinHeap heap;
+  print_queue_of_process(q);
 
-  // estamos assumindo que
+  while (!heap.is_empty()) {
+    // Executa o processo com maior prioridade (raiz)
+    Process proc = heap.extract_min();
 
-  while (heap.is_empty() /*teste para manter o loop até o heap ficar vazio*/)
-  {
-
-    int n = (rand() % (n_process + 1));
-
-    // nao vamos considerar o 0 porque nao existe logicamente (vejam os
-    // slides!!!!!!) vamos de 1 até random_number%(n_process+1) caso n_process
-    // for 4: vamos de 1 até mod 5, que eh 4
-    //    | | | |
-    //    v v v v
-    // 0 1 2 3 4
-    // ^ nao consideramos
-
-    for (int i = 1; i <= n; i++)
-    {
-      // execute_Process(heap.heap_[i]);   // isso aqui tá dando errado porque
-      // nao sabemos como a heap sera implementada
-      //  o nosso objetivo eh pegar o process de indice i e executá-lo
-      heap.update_key(i);
-      // heap.heapify_up(i); // atualizamos o key, devemos fazer o heapify para
-      // manter as propriedades de uma min heap
-      //> L: Eu acho que não faz sentido chamar heapify_up na main
-      //> faz mais sentido ser chamado dentro dos métodos, não?
-      // heap.remove_if();
-    }
+    execute_Process(&proc);
   }
 
-  return 0;
+  return EXIT_SUCCESS;
 }

@@ -27,6 +27,7 @@ private:
   void heapify_down(size_t index);
 
 public:
+  MinHeap() : m_size(0) {}
   //> Funções de conversão entre fila e heap
   //> não apaga a fila original (se precisar fazer isso, chamar free_queue)
   static MinHeap convert_queue_to_heap(Queue *queue);
