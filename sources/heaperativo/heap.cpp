@@ -140,4 +140,13 @@ void MinHeap::update_key(unsigned int process_id) {
 
 /// @brief
 /// @return
-bool MinHeap::remove_root_if_zero() {}
+bool MinHeap::remove_root_if_zero() {
+   if (is_empty()) return false;
+
+  if (root_key() == 0) {
+    extract_min(); // remove a raiz
+    return true;
+  }
+
+  return false;
+}
